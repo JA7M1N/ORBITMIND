@@ -1,0 +1,256 @@
+/* ==========================================================================
+   DisasterNav
+   The first thing a judge's eye lands on. Every module is a vertical
+   card, not a list row — a list row reads as a settings menu, a card
+   with a large icon reads as a mode-select in professional instrument
+   software (Figma's tool palette, DaVinci Resolve's page switcher).
+   Hierarchy is carried by three signals layered together: a left accent
+   bar (position), an icon-first layout (recognition speed — the icon
+   reads before the label does), and weight contrast between the module
+   name (medium) and its status badge (understated, never competing for
+   attention with the name).
+   ========================================================================== */
+
+.disaster-nav {
+  width: 240px;
+  height: 100%;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-3);
+  gap: var(--space-2);
+  overflow: hidden;
+}
+
+.disaster-nav__brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  padding: 0 var(--space-3) var(--space-6);
+}
+
+.disaster-nav__brand-mark {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.disaster-nav__brand-sub {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.disaster-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.disaster-nav__footer {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-hairline);
+}
+
+.disaster-nav__compare-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.disaster-nav__compare-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.disaster-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out);
+}
+
+.disaster-card:hover:not(.disaster-card--disabled) {
+  background: var(--bg-hover);
+}
+
+.disaster-card:hover:not(.disaster-card--disabled) .disaster-card__icon {
+  transform: scale(1.04);
+}
+
+/* Active state: thin accent-colored left border + very subtle accent glow.
+   The glow is a radial wash, not a flat fill — it should feel like the
+   card is emitting a small amount of the accent color, not painted with it. */
+.disaster-card--active {
+  border-left-color: var(--accent);
+  background:
+    radial-gradient(120% 100% at 0% 50%, var(--accent-glow), transparent 70%),
+    var(--bg-active);
+}
+
+.disaster-card--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.disaster-card__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: transform var(--duration-base) var(--ease-spring), color var(--duration-slow) var(--ease-out);
+}
+
+.disaster-card--active .disaster-card__icon {
+  color: var(--accent-outline);
+}
+
+.disaster-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.disaster-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  line-height: var(--leading-sm);
+}
+
+.disaster-card--active .disaster-card__name {
+  font-weight: var(--weight-semibold);
+}
+
+.disaster-card__region {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.disaster-card__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.disaster-card__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.disaster-card__status-dot--live {
+  background: var(--status-live);
+  animation: status-pulse 2.5s ease-in-out infinite;
+}
+
+.disaster-card__status-dot--demo {
+  background: var(--status-demo);
+}
+
+.disaster-card__status-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0);
+  }
+}
+
+.disaster-card__tooltip {
+  position: absolute;
+  left: calc(100% + var(--space-2));
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hairline-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  box-shadow: var(--shadow-elevated);
+  opacity: 0;
+  pointer-events: none;
+  z-index: var(--z-toast);
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.disaster-card--disabled:hover .disaster-card__tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disaster-card__status-dot--live {
+    animation: none;
+  }
+}
+
+/* ── Module switch — active card entrance animation ──────────────────────── */
+/* When a card becomes active (disaster switch) it pulses with a quick
+   left-to-right accent sweep. The animation is attached to the
+   data-accent-transition attribute which updates on every switch. */
+
+.disaster-card--active {
+  animation: card-activate 400ms var(--ease-out) both;
+}
+
+@keyframes card-activate {
+  0%   { background: radial-gradient(120% 100% at 0% 50%, var(--accent-glow), transparent 0%),  var(--bg-active); }
+  40%  { background: radial-gradient(120% 100% at 0% 50%, var(--accent-glow), transparent 100%), var(--bg-active); }
+  100% { background: radial-gradient(120% 100% at 0% 50%, var(--accent-glow), transparent 70%),  var(--bg-active); }
+}
+
+/* Icon bounces up on activation */
+.disaster-card--active .disaster-card__icon {
+  animation: icon-bounce 350ms var(--ease-spring) both;
+}
+
+@keyframes icon-bounce {
+  0%   { transform: scale(1)    translateY(0);   }
+  40%  { transform: scale(1.18) translateY(-3px); }
+  70%  { transform: scale(0.96) translateY(1px);  }
+  100% { transform: scale(1)    translateY(0);   }
+}

@@ -1,0 +1,230 @@
+/* ==========================================================================
+   SatelliteTimeline
+   Horizontal scrubber that lives bottom-left on the map, replacing the
+   two-button BeforeAfterToggle.
+   ========================================================================== */
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
+
+.sat-timeline {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  z-index: var(--z-map-overlay);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  /* Glass pill — matches the existing BeforeAfterToggle glass treatment */
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-hairline-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  padding: var(--space-3) var(--space-4);
+
+  /* Prevent the scrubber from shrinking on very small maps */
+  min-width: 320px;
+  max-width: 420px;
+}
+
+/* ── Play/Pause button ───────────────────────────────────────────────────────── */
+
+.sat-timeline__play-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+.sat-timeline__play-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.sat-timeline__play-btn--playing {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
+  color: var(--accent-outline);
+}
+
+/* ── Track area ──────────────────────────────────────────────────────────────── */
+
+.sat-timeline__track-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+/* ── Ticks row ───────────────────────────────────────────────────────────────── */
+
+.sat-timeline__ticks {
+  position: relative;
+  height: 22px;
+  /* Tick buttons are absolute within this row */
+}
+
+.sat-timeline__tick {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.sat-timeline__tick-mark {
+  display: block;
+  width: 1px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1px;
+  transition: background 150ms ease, height 150ms ease;
+}
+.sat-timeline__tick:hover .sat-timeline__tick-mark,
+.sat-timeline__tick--active .sat-timeline__tick-mark {
+  background: var(--accent-outline);
+  height: 8px;
+}
+
+.sat-timeline__tick-date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+.sat-timeline__tick--active .sat-timeline__tick-date {
+  color: var(--accent-outline);
+  font-weight: var(--weight-semibold);
+}
+
+/* ── Track bar ───────────────────────────────────────────────────────────────── */
+
+.sat-timeline__track {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  outline: none;
+}
+.sat-timeline__track:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-outline);
+}
+
+/* Filled portion — accent gradient */
+.sat-timeline__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--accent) 40%, transparent),
+    var(--accent)
+  );
+  transition: width 350ms var(--ease-out);
+  pointer-events: none;
+}
+
+/* ── Thumb ───────────────────────────────────────────────────────────────────── */
+
+.sat-timeline__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* Don't clip the pulse animation */
+  overflow: visible;
+}
+
+.sat-timeline__thumb-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 6px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 1;
+  transition: left 350ms var(--ease-out);
+}
+
+/* Radar pulse — only visible while auto-playing */
+.sat-timeline__thumb-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+  animation: radar-pulse 1.2s ease-out infinite;
+}
+
+@keyframes radar-pulse {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0;   }
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────────────────── */
+
+.sat-timeline__tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-panel-solid);
+  border: 1px solid var(--border-hairline-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  white-space: nowrap;
+  box-shadow: var(--shadow-elevated);
+  pointer-events: none;
+  animation: tooltip-pop 150ms var(--ease-spring) both;
+  z-index: 10;
+}
+
+@keyframes tooltip-pop {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0)   scale(1);    }
+}
+
+.sat-timeline__tooltip-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  color: var(--accent-outline);
+  margin-bottom: 2px;
+}
+
+.sat-timeline__tooltip-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  max-width: 280px;
+  white-space: normal;
+  line-height: 1.4;
+}

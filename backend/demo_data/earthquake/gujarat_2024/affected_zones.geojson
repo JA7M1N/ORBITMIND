@@ -1,0 +1,474 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.541869,
+              23.09808
+            ],
+            [
+              71.511912,
+              23.10167
+            ],
+            [
+              71.514335,
+              23.127567
+            ],
+            [
+              71.485375,
+              23.086035
+            ],
+            [
+              71.462729,
+              23.071538
+            ],
+            [
+              71.54095,
+              23.002727
+            ],
+            [
+              71.57617,
+              23.02261
+            ],
+            [
+              71.54424,
+              23.037757
+            ],
+            [
+              71.572573,
+              23.041873
+            ],
+            [
+              71.56186,
+              23.04918
+            ],
+            [
+              71.541869,
+              23.09808
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8718,
+        "area_km2": 148.168,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "destroyed",
+        "location_label": "Epicentre \u2014 Bhuj Urban Core",
+        "coherence_loss": 0.795,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 22543
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.72882,
+              22.968139
+            ],
+            [
+              71.651348,
+              23.019795
+            ],
+            [
+              71.615895,
+              23.022187
+            ],
+            [
+              71.619374,
+              23.005232
+            ],
+            [
+              71.603303,
+              23.006642
+            ],
+            [
+              71.596382,
+              22.994662
+            ],
+            [
+              71.574294,
+              22.990055
+            ],
+            [
+              71.55913,
+              22.900079
+            ],
+            [
+              71.590809,
+              22.900178
+            ],
+            [
+              71.737892,
+              22.890354
+            ],
+            [
+              71.72882,
+              22.968139
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8805,
+        "area_km2": 231.684,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "destroyed",
+        "location_label": "Anjar Town",
+        "coherence_loss": 0.788,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 19971
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.387102,
+              23.17586
+            ],
+            [
+              71.367733,
+              23.183944
+            ],
+            [
+              71.367345,
+              23.185604
+            ],
+            [
+              71.347026,
+              23.088866
+            ],
+            [
+              71.373468,
+              23.076752
+            ],
+            [
+              71.372471,
+              23.056309
+            ],
+            [
+              71.379746,
+              23.077676
+            ],
+            [
+              71.416983,
+              23.076166
+            ],
+            [
+              71.413543,
+              23.102399
+            ],
+            [
+              71.430404,
+              23.096368
+            ],
+            [
+              71.387102,
+              23.17586
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8535,
+        "area_km2": 187.413,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "major",
+        "location_label": "Bhachau Municipality",
+        "coherence_loss": 0.366,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 14268
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.803864,
+              23.115447
+            ],
+            [
+              71.785851,
+              23.17371
+            ],
+            [
+              71.756051,
+              23.151382
+            ],
+            [
+              71.639329,
+              23.126351
+            ],
+            [
+              71.639227,
+              23.119918
+            ],
+            [
+              71.690087,
+              23.108334
+            ],
+            [
+              71.683336,
+              23.089239
+            ],
+            [
+              71.724557,
+              23.057682
+            ],
+            [
+              71.766931,
+              23.038814
+            ],
+            [
+              71.798312,
+              23.054644
+            ],
+            [
+              71.803864,
+              23.115447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7665,
+        "area_km2": 280.026,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "major",
+        "location_label": "Rapar Block",
+        "coherence_loss": 0.471,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 42567
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.344441,
+              22.942737
+            ],
+            [
+              71.334323,
+              22.95993
+            ],
+            [
+              71.255414,
+              22.960281
+            ],
+            [
+              71.242682,
+              22.955139
+            ],
+            [
+              71.208695,
+              22.983315
+            ],
+            [
+              71.214295,
+              22.952197
+            ],
+            [
+              71.207396,
+              22.827343
+            ],
+            [
+              71.214414,
+              22.832745
+            ],
+            [
+              71.319096,
+              22.839943
+            ],
+            [
+              71.415631,
+              22.873369
+            ],
+            [
+              71.344441,
+              22.942737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7815,
+        "area_km2": 333.748,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "major",
+        "location_label": "Gandhidham Port Area",
+        "coherence_loss": 0.452,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 83242
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.908024,
+              22.964522
+            ],
+            [
+              71.869619,
+              22.900539
+            ],
+            [
+              71.832419,
+              22.905174
+            ],
+            [
+              71.797407,
+              22.876741
+            ],
+            [
+              71.730285,
+              22.865155
+            ],
+            [
+              71.743285,
+              22.848514
+            ],
+            [
+              71.757844,
+              22.82581
+            ],
+            [
+              71.785707,
+              22.817941
+            ],
+            [
+              71.843332,
+              22.792191
+            ],
+            [
+              71.867315,
+              22.765269
+            ],
+            [
+              71.908024,
+              22.964522
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7375,
+        "area_km2": 391.835,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "moderate",
+        "location_label": "Mundra Industrial Zone",
+        "coherence_loss": 0.232,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 79574
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              71.276096,
+              23.264184
+            ],
+            [
+              71.276623,
+              23.313095
+            ],
+            [
+              71.247236,
+              23.330645
+            ],
+            [
+              71.218921,
+              23.305112
+            ],
+            [
+              71.232824,
+              23.360626
+            ],
+            [
+              71.170625,
+              23.306997
+            ],
+            [
+              71.134552,
+              23.11022
+            ],
+            [
+              71.16363,
+              23.129643
+            ],
+            [
+              71.151465,
+              23.095206
+            ],
+            [
+              71.177443,
+              23.146413
+            ],
+            [
+              71.276096,
+              23.264184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.6551,
+        "area_km2": 453.155,
+        "disaster_type": "earthquake",
+        "source": "mock_insar",
+        "event_id": "gujarat_2024",
+        "damage_level": "moderate",
+        "location_label": "Naliya Airfield Region",
+        "coherence_loss": 0.203,
+        "estimated_magnitude": 6.4,
+        "depth_km": 10,
+        "buildings_collapsed": 87263
+      }
+    }
+  ]
+}

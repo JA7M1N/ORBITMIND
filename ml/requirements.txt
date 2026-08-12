@@ -1,0 +1,27 @@
+# OrbitalMind — ML Module Dependencies
+# Python 3.11 | CUDA 11.8+ recommended (RTX 3050 / 4GB VRAM)
+
+# --- Earth Observation & Remote Sensing ---
+earthengine-api>=0.1.390        # Google Earth Engine Python API
+rasterio>=1.3.9                 # Geospatial raster I/O (GeoTIFF, SAR tiles)
+
+# --- Numerical & Scientific Computing ---
+numpy>=1.26.0
+scipy>=1.12.0
+
+# --- Deep Learning (PyTorch 2.x) ---
+# Install torch separately with CUDA wheels from https://pytorch.org/get-started
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+torch>=2.1.0
+torchvision>=0.16.0
+
+# --- Segmentation Models ---
+# Attention U-Net with EfficientNet-B0 encoder (FP16 compatible)
+segmentation-models-pytorch>=0.3.3
+
+# --- Geospatial Vector Processing ---
+geopandas>=0.14.0
+shapely>=2.0.0
+
+# --- Image Processing ---
+Pillow>=10.2.0

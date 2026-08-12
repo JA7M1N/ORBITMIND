@@ -1,0 +1,111 @@
+.generate-report {
+  position: relative;
+  margin-top: var(--space-6);
+  width: 100%;
+}
+
+.generate-report__btn {
+  width: 100%;
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid var(--border-hairline-strong);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  font-family: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  /* Ghost by default with a subtle accent border — this button sits
+     below a full-strength primary action elsewhere in the flow (Run
+     analysis), so it shouldn't compete for the same visual weight. */
+  border-color: color-mix(in srgb, var(--accent-outline) 30%, var(--border-hairline-strong));
+  transition:
+    width var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.generate-report__btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-outline) 25%, transparent), 0 0 16px var(--accent-glow);
+}
+
+.generate-report__btn:active:not(:disabled) {
+  transform: translateY(0.5px);
+}
+
+.generate-report__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Loading: collapses to an icon-only square, centered spinner, no text
+   node in the DOM at all — this is what avoids layout shift, rather
+   than hiding text with opacity while it still occupies space. */
+.generate-report__btn--loading {
+  width: 44px;
+  padding: 0;
+  border-color: var(--border-hairline-strong);
+  color: var(--text-secondary);
+  cursor: wait;
+}
+
+.generate-report__spinner {
+  animation: generate-report-spin 0.8s linear infinite;
+}
+
+@keyframes generate-report-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.generate-report__btn--success {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+}
+
+.generate-report__btn--error {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.generate-report__toast {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 0;
+  right: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.generate-report__toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .generate-report__spinner {
+    animation-duration: 1.6s;
+  }
+}

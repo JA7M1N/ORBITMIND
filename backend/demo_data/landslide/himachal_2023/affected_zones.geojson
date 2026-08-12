@@ -1,0 +1,329 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.091077,
+              32.046925
+            ],
+            [
+              77.063426,
+              31.941728
+            ],
+            [
+              77.082848,
+              31.912955
+            ],
+            [
+              77.087181,
+              31.859391
+            ],
+            [
+              77.099763,
+              31.905477
+            ],
+            [
+              77.104155,
+              31.893969
+            ],
+            [
+              77.121417,
+              31.921739
+            ],
+            [
+              77.091077,
+              32.046925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8561,
+        "area_km2": 79.929,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 52,
+        "location_label": "Kullu Beas Valley \u2014 NH3 Blockage",
+        "debris_volume_m3": 177413471,
+        "road_blocked": false,
+        "houses_buried": 17
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.910443,
+              32.140742
+            ],
+            [
+              76.908288,
+              32.149311
+            ],
+            [
+              76.911855,
+              32.176179
+            ],
+            [
+              76.881746,
+              32.141483
+            ],
+            [
+              76.873072,
+              32.098147
+            ],
+            [
+              76.881602,
+              32.084892
+            ],
+            [
+              76.924273,
+              32.097553
+            ],
+            [
+              76.910443,
+              32.140742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8748,
+        "area_km2": 55.415,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 48,
+        "location_label": "Mandi District \u2014 Uhl River",
+        "debris_volume_m3": 197654289,
+        "road_blocked": false,
+        "houses_buried": 5
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.437185,
+              31.626497
+            ],
+            [
+              77.422137,
+              31.621162
+            ],
+            [
+              77.39081,
+              31.632531
+            ],
+            [
+              77.366281,
+              31.591898
+            ],
+            [
+              77.424184,
+              31.551471
+            ],
+            [
+              77.44008,
+              31.575828
+            ],
+            [
+              77.422336,
+              31.59665
+            ],
+            [
+              77.437185,
+              31.626497
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.743,
+        "area_km2": 109.204,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 45,
+        "location_label": "Rampur Bushahr Slopes",
+        "debris_volume_m3": 247856339,
+        "road_blocked": false,
+        "houses_buried": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.660288,
+              32.008527
+            ],
+            [
+              77.651642,
+              32.032907
+            ],
+            [
+              77.648149,
+              32.02728
+            ],
+            [
+              77.639483,
+              32.028453
+            ],
+            [
+              77.639571,
+              31.996761
+            ],
+            [
+              77.629754,
+              31.963092
+            ],
+            [
+              77.666463,
+              31.982952
+            ],
+            [
+              77.660288,
+              32.008527
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7866,
+        "area_km2": 35.504,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 58,
+        "location_label": "Kinnaur Border \u2014 Sutlej Canyon",
+        "debris_volume_m3": 127086210,
+        "road_blocked": true,
+        "houses_buried": 15
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.722436,
+              31.321363
+            ],
+            [
+              76.720382,
+              31.329667
+            ],
+            [
+              76.664837,
+              31.311838
+            ],
+            [
+              76.676526,
+              31.25511
+            ],
+            [
+              76.69047,
+              31.251018
+            ],
+            [
+              76.710625,
+              31.271401
+            ],
+            [
+              76.728112,
+              31.271804
+            ],
+            [
+              76.722436,
+              31.321363
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8224,
+        "area_km2": 55.895,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 38,
+        "location_label": "Bilaspur Ridgeline",
+        "debris_volume_m3": 87390854,
+        "road_blocked": true,
+        "houses_buried": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.817193,
+              31.844721
+            ],
+            [
+              77.79468,
+              31.844157
+            ],
+            [
+              77.78638,
+              31.890138
+            ],
+            [
+              77.781593,
+              31.827901
+            ],
+            [
+              77.785154,
+              31.817369
+            ],
+            [
+              77.764395,
+              31.792037
+            ],
+            [
+              77.770116,
+              31.746299
+            ],
+            [
+              77.817193,
+              31.844721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7876,
+        "area_km2": 80.059,
+        "disaster_type": "landslide",
+        "source": "mock_sar_dem",
+        "event_id": "himachal_2023",
+        "slope_angle": 42,
+        "location_label": "Shimla Hills \u2014 Old Hindustan-Tibet Rd",
+        "debris_volume_m3": 158254505,
+        "road_blocked": false,
+        "houses_buried": 17
+      }
+    }
+  ]
+}

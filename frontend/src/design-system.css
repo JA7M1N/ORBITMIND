@@ -1,0 +1,258 @@
+/* ==========================================================================
+   OrbitalMind Design System
+   A focused token set for a satellite disaster-intelligence console.
+   Every visual value in the app should resolve to a variable defined here —
+   no hardcoded hex codes, pixel values, or durations in components.
+   ========================================================================== */
+
+:root {
+  /* ---- Typography -------------------------------------------------------
+     Two type families: Inter for interface text (it disappears into the
+     content, which is the point for a tool judges need to read fast under
+     time pressure), and a monospace face reserved ONLY for numbers —
+     population counts, percentages, coordinates, scores. Putting data in
+     mono is what makes this read as an instrument panel instead of a
+     marketing page: numbers get a fixed-width grid, so a priority score of
+     0.94 and 0.31 occupy the same visual weight and the eye can scan a
+     column of them like a spreadsheet.
+     Exactly four sizes. Anything that needs to be bigger or smaller than
+     these four is a sign the hierarchy is wrong, not that a fifth size is
+     needed. */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+  --text-xs: 11px;   /* eyebrows, status badges, map legend labels */
+  --text-sm: 13px;   /* secondary UI text, metadata rows, nav labels */
+  --text-base: 15px; /* primary reading size — panel body, narration text */
+  --text-lg: 20px;   /* section headers, zone names, module display name */
+
+  --leading-xs: 16px;
+  --leading-sm: 20px;
+  --leading-base: 22px;
+  --leading-lg: 28px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;   /* default UI weight — Linear/Raycast lean medium, not regular */
+  --weight-semibold: 600; /* headers, active states, numbers that matter */
+
+  --tracking-eyebrow: 0.06em; /* used only on uppercase --text-xs labels */
+
+  /* ---- Spacing (4px base) ------------------------------------------------
+     One scale, used for padding, gaps, and margins alike. Never an
+     arbitrary value between these. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* ---- Radius ------------------------------------------------------------
+     4 = small controls (badges, chips, inline buttons)
+     8 = standard controls (buttons, inputs, list rows)
+     12 = cards, panel sections
+     20 = large surfaces (modals, the glass panel container itself) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+
+  /* ---- Elevation -----------------------------------------------------
+     Two levels only. "Subtle" separates a resting card from the canvas
+     behind it. "Elevated" is reserved for things floating above the map —
+     the panel edge, an open dropdown, a toast. Both are soft and low-
+     contrast; this product should never look like it has drop shadows
+     from a UI kit, it should look like glass catching ambient light. */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  /* ---- Motion --------------------------------------------------------
+     Three durations, all ease-out by default: state changes should
+     arrive decisively and never bounce on the way in. The one exception
+     is --ease-spring, used exclusively for the nav icon hover — a single,
+     deliberate moment of "aliveness" rather than a house style. */
+  --duration-fast: 150ms;   /* hover, focus, button press */
+  --duration-base: 250ms;   /* panel content swap, badge state change */
+  --duration-slow: 400ms;   /* accent color transition across the whole UI */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-map-fly: 1400ms; /* MapLibre flyTo — matched to easeInOutCubic in JS */
+
+  /* ---- Z-index ---------------------------------------------------------- */
+  --z-base: 0;
+  --z-map-overlay: 10;
+  --z-nav: 20;
+  --z-panel: 30;
+  --z-toast: 50;
+  --z-modal: 60;
+
+  /* ---- Base surfaces (disaster-agnostic) --------------------------------
+     The canvas is near-black, not pure black — pure black next to a
+     satellite map reads as "broken image," near-black reads as "space." */
+  --bg-canvas: #0a0e17;
+  --bg-sidebar: #0d1526;
+  --bg-panel: rgba(13, 21, 38, 0.72);
+  --bg-panel-solid: #0d1526;
+  --bg-elevated: #131b2e;
+  --bg-hover: rgba(255, 255, 255, 0.04);
+  --bg-active: rgba(255, 255, 255, 0.06);
+
+  --border-hairline: rgba(255, 255, 255, 0.06);
+  --border-hairline-strong: rgba(255, 255, 255, 0.1);
+
+  --text-primary: #e8ecf4;
+  --text-secondary: #8b95a8;
+  --text-tertiary: #545e70;
+
+  --status-live: #22c55e;
+  --status-demo: #f59e0b;
+
+  /* ---- Active disaster accent (redefined per data-disaster attribute
+     below; these are the FALLBACK values so nothing renders unstyled
+     before an attribute is set) ---- */
+  --accent: #1e40af;
+  --accent-dim: #1e3a8a;
+  --accent-outline: #60a5fa;
+  --accent-glow: rgba(30, 64, 175, 0.15);
+}
+
+/* ---- Per-disaster theme ---------------------------------------------
+   Setting data-disaster on <html> re-points --accent/--accent-dim/
+   --accent-outline/--accent-glow for the ENTIRE app in one write. Every
+   component that needs "the current disaster's color" reads these three
+   variables — nothing holds disaster color as component state or a prop
+   drilled from a lookup table. This is what makes the whole UI recolor
+   in one animation frame instead of component-by-component. */
+
+[data-disaster='flood'] {
+  --accent: #1e40af;
+  --accent-dim: #1e3a8a;
+  --accent-outline: #60a5fa;
+  --accent-glow: rgba(30, 64, 175, 0.15);
+}
+[data-disaster='wildfire'] {
+  --accent: #dc2626;
+  --accent-dim: #991b1b;
+  --accent-outline: #fca5a5;
+  --accent-glow: rgba(220, 38, 38, 0.15);
+}
+[data-disaster='landslide'] {
+  --accent: #92400e;
+  --accent-dim: #78350f;
+  --accent-outline: #fbbf24;
+  --accent-glow: rgba(146, 64, 14, 0.15);
+}
+[data-disaster='cyclone'] {
+  --accent: #7c3aed;
+  --accent-dim: #581c87;
+  --accent-outline: #c084fc;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+}
+[data-disaster='earthquake'] {
+  --accent: #c2410c;
+  --accent-dim: #9a3412;
+  --accent-outline: #fb923c;
+  --accent-glow: rgba(194, 65, 12, 0.15);
+}
+
+/* Every property that reads an accent variable transitions on the slow
+   duration, so switching modules reads as one coordinated color wash
+   rather than a flicker of independently-updating elements. */
+* {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0s;
+}
+[data-accent-transition] {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-out);
+}
+
+/* ---- Reset & base ------------------------------------------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; /* the app is a fixed console, not a scrolling page */
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1, 'zero' 1; /* tabular, slashed-zero numerals */
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--text-tertiary);
+}
+
+/* ---- Glass panel ---------------------------------------------------------
+   The primary surface for the right analysis panel and any floating card.
+   Deliberately restrained: no gradient, no colored glow by default. The
+   only accent presence is the 1px border easing toward --accent-outline —
+   a signal, not a decoration. This is what keeps it feeling like
+   instrumentation (Linear/Raycast) instead of a generic "dark dashboard"
+   template, which tends to over-saturate glass surfaces with color. */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  transition: border-color var(--duration-slow) var(--ease-out);
+}
+.glass-panel[data-active='true'] {
+  border-color: color-mix(in srgb, var(--accent-outline) 35%, var(--border-hairline));
+}
+
+/* ---- Scrollbar ----------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-hairline-strong);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ---- Focus -------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent-outline);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Reduced motion ------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *, [data-accent-transition] {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,448 @@
+/* ==========================================================================
+   PlatformSummary — Cinematic Welcome Screen
+   Full-screen layout: hero (top) + module cards (bottom)
+   ========================================================================== */
+
+/* ── Root container ────────────────────────────────────────────────────────── */
+
+.platform-summary {
+  position: fixed;
+  inset: 0;
+  z-index: 200;                    /* above MapLibre canvas, sidebar, zone layers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  overflow: hidden;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  /* Solid opaque background — var(--bg-base) was undefined (transparent) */
+  background: #090e1a;
+  animation: ps-enter 500ms var(--ease-out) both;
+}
+
+@keyframes ps-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Exit: played when a module card is clicked — fades + scales down */
+.platform-summary--exiting {
+  animation: ps-exit 280ms var(--ease-out) both;
+  pointer-events: none;
+}
+
+@keyframes ps-exit {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.97); }
+}
+
+/* ── Backdrop ────────────────────────────────────────────────────────────────── */
+
+.ps-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Fine instrument grid */
+.ps-backdrop__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black, transparent);
+}
+
+/* Radial centre glow */
+.ps-backdrop__radial {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255,255,255,0.05), transparent 70%);
+}
+
+/* Slow horizontal scan line — sweeps top to bottom */
+.ps-backdrop__scanline-h {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: scan-sweep 6s linear infinite;
+}
+
+@keyframes scan-sweep {
+  from { top: -2px; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  to   { top: 100%; opacity: 0; }
+}
+
+/* ── Hero section ────────────────────────────────────────────────────────────── */
+
+.ps-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  animation: ps-hero-in 700ms var(--ease-out) 80ms both;
+}
+
+@keyframes ps-hero-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Orbital rings SVG ───────────────────────────────────────────────────────── */
+
+.ps-orbital {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  color: rgba(255,255,255,0.6);
+  /* Slow rotation of the whole SVG */
+  animation: orbital-spin 30s linear infinite;
+}
+
+@keyframes orbital-spin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+/* Individual rings — each at a slightly different tilt/speed feel */
+.ps-orbital__ring {
+  transform-origin: 160px 160px;
+}
+.ps-orbital__ring--outer { animation: ring-pulse 4s ease-in-out infinite alternate; }
+.ps-orbital__ring--mid   { animation: ring-pulse 4s ease-in-out infinite alternate 0.8s; }
+.ps-orbital__ring--inner { animation: ring-pulse 4s ease-in-out infinite alternate 1.6s; }
+
+@keyframes ring-pulse {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+/* Satellite dots */
+.ps-orbital__sat {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+.ps-orbital__sat--outer { color: rgba(120,200,255,0.9); }
+.ps-orbital__sat--mid   { color: rgba(160,220,255,0.7); }
+
+/* ── Hero text ───────────────────────────────────────────────────────────────── */
+
+.ps-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 380px;
+}
+
+.ps-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.ps-hero__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: eyebrow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes eyebrow-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #22c55e; }
+  50%       { opacity: 0.5; box-shadow: 0 0 2px #22c55e; }
+}
+
+.ps-hero__heading {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: var(--weight-bold);
+  line-height: 1.15;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.ps-hero__heading-accent {
+  background: linear-gradient(120deg, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ps-hero__tagline {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Module cards row ────────────────────────────────────────────────────────── */
+
+.ps-cards {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* ── Individual module card ──────────────────────────────────────────────────── */
+
+.ps-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  width: 156px;
+  padding: var(--space-4) var(--space-4) var(--space-5);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  font-family: inherit;
+
+  /* Stagger entrance — delay set inline via style prop */
+  animation: card-in 500ms var(--ease-out) both;
+
+  transition:
+    transform     250ms var(--ease-spring),
+    background    200ms ease,
+    border-color  200ms ease,
+    box-shadow    250ms ease;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ps-card:hover,
+.ps-card--hovered {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: color-mix(in srgb, var(--card-accent, #60a5fa) 40%, rgba(255,255,255,0.12));
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px color-mix(in srgb, var(--card-accent, #60a5fa) 20%, transparent),
+    0 0 24px color-mix(in srgb, var(--card-accent, #60a5fa) 12%, transparent);
+}
+
+/* LIVE card — green standing border */
+.ps-card--live {
+  border-color: rgba(34, 197, 94, 0.25);
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.06), 0 0 20px rgba(34,197,94,0.05);
+}
+
+/* Accent glow blob — grows on hover */
+.ps-card__glow {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--card-accent, #60a5fa) 30%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.ps-card:hover .ps-card__glow {
+  opacity: 1;
+}
+
+/* Scan-line — sweeps on hover */
+.ps-card__scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, rgba(255,255,255,0.3)), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.ps-card:hover .ps-card__scanline {
+  opacity: 0.6;
+  animation: card-scan 1.2s ease-in-out infinite;
+}
+@keyframes card-scan {
+  from { top: 0; }
+  to   { top: 100%; }
+}
+
+/* Status badge */
+.ps-card__status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.ps-card__status--live {
+  color: #22c55e;
+}
+.ps-card__status--demo {
+  color: var(--text-tertiary);
+}
+
+.ps-card__status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.ps-card__status--live .ps-card__status-dot {
+  animation: status-blink 2s ease-in-out infinite;
+  box-shadow: 0 0 4px #22c55e;
+}
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Emoji */
+.ps-card__emoji {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+  transition: transform 250ms var(--ease-spring);
+}
+.ps-card:hover .ps-card__emoji {
+  transform: scale(1.15) translateY(-2px);
+}
+
+/* Module name */
+.ps-card__name {
+  font-size: 14px;
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* Satellite source */
+.ps-card__source {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: color-mix(in srgb, var(--card-accent, #60a5fa) 80%, var(--text-tertiary));
+  margin-top: 2px;
+}
+
+/* Detection method */
+.ps-card__method {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+  margin-top: var(--space-1);
+}
+
+/* Arrow icon — slides in on hover */
+.ps-card__arrow {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  color: var(--text-tertiary);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity  200ms ease,
+    transform 200ms var(--ease-spring),
+    color    200ms ease;
+}
+.ps-card:hover .ps-card__arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: color-mix(in srgb, var(--card-accent, #60a5fa) 90%, white);
+}
+
+/* ── Bottom hint ─────────────────────────────────────────────────────────────── */
+
+.ps-hint {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  margin: 0;
+  animation: ps-hint-in 800ms var(--ease-out) 700ms both;
+}
+
+@keyframes ps-hint-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .ps-hero {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+  .ps-hero__text {
+    align-items: center;
+    max-width: 100%;
+  }
+  .ps-orbital {
+    width: 140px;
+    height: 140px;
+  }
+  .ps-hero__eyebrow {
+    justify-content: center;
+  }
+  .ps-cards {
+    gap: var(--space-2);
+  }
+  .ps-card {
+    width: 130px;
+    padding: var(--space-3);
+  }
+}
+
+@media (max-width: 600px) {
+  .platform-summary {
+    gap: var(--space-5);
+    padding: var(--space-6) var(--space-4) var(--space-4);
+  }
+  .ps-orbital {
+    width: 100px;
+    height: 100px;
+  }
+  .ps-cards {
+    gap: var(--space-2);
+  }
+  .ps-card {
+    width: 110px;
+    padding: var(--space-3);
+  }
+  .ps-card__emoji {
+    font-size: 22px;
+  }
+  .ps-card__name {
+    font-size: 12px;
+  }
+  .ps-card__source,
+  .ps-card__method {
+    display: none;
+  }
+}

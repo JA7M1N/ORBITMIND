@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Layout philosophy
+   Three fixed-role columns, not a responsive grid: nav (identity + mode
+   select), map (the primary surface — everything else is instrumentation
+   around it), panel (analysis output). Fixed pixel widths on nav (240px)
+   and panel (380px) are deliberate — this is a console meant to be read
+   on a single presentation display during a demo, not a page that
+   reflows for arbitrary viewports. The map is the only flexible column
+   because it's the only one where "more space" has real value (seeing
+   more coastline, more district boundary) — more width on the nav or
+   panel would just add empty margin.
+   ========================================================================== */
+
+.app-shell {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-canvas);
+}
+
+.app-shell__map-column {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.app-shell__panel-column {
+  position: relative;
+  z-index: var(--z-panel);
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.map-loading-scrim {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-canvas);
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  z-index: var(--z-map-overlay);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.map-loading-scrim--visible {
+  opacity: 1;
+}
+
+/* Floating infra-marker toggle */
+.infra-toggle {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: var(--z-map-overlay);
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+}
+
+.infra-toggle__btn {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.infra-toggle__btn:hover { color: var(--text-secondary); }
+.infra-toggle__btn--active {
+  background: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ── Map attribution (dark themed, overrides MapLibre default) ────────────── */
+.maplibregl-ctrl-attrib {
+  background: rgba(10, 14, 23, 0.75) !important;
+  backdrop-filter: blur(8px);
+  border-radius: 4px !important;
+  color: rgba(139, 149, 168, 0.9) !important;
+  font-size: 9px !important;
+  font-family: Inter, sans-serif !important;
+  padding: 2px 6px !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+}
+.maplibregl-ctrl-attrib a { color: rgba(139, 149, 168, 0.9) !important; text-decoration: none !important; }
+.maplibregl-ctrl-attrib-button { display: none !important; }
+.maplibregl-ctrl-attrib.maplibregl-compact { padding: 2px 6px !important; }
+
+/* ── Priority list skeleton ───────────────────────────────────────────────── */
+.priority-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.priority-skeleton__card {
+  height: 68px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.07) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation:
+    priority-shimmer 1.5s ease-in-out infinite,
+    priority-stagger-in 300ms cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.priority-skeleton__card:nth-child(1) { animation-delay: 0s,    0ms;   }
+.priority-skeleton__card:nth-child(2) { animation-delay: 0s,    60ms;  }
+.priority-skeleton__card:nth-child(3) { animation-delay: 0s,    120ms; }
+.priority-skeleton__card:nth-child(4) { animation-delay: 0s,    180ms; }
+.priority-skeleton__card:nth-child(5) { animation-delay: 0s,    240ms; }
+
+@keyframes priority-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes priority-stagger-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Real cards staggered entrance after skeleton fades */
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Mobile: bottom sheet + tab bar ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .app-shell { flex-direction: column; }
+
+  .app-shell__map-column {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Right panel becomes a bottom sheet */
+  .app-shell__panel-column {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 75vh;
+    transform: translateY(calc(100% - 72px));
+    transition: transform 350ms cubic-bezier(0.16,1,0.3,1);
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+  }
+
+  .app-shell__panel-column--open {
+    transform: translateY(0);
+  }
+
+  .right-panel {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 75vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Drag handle (only shown on mobile) */
+.bottom-sheet-handle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bottom-sheet-handle {
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.15);
+    margin: 8px auto 4px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+}

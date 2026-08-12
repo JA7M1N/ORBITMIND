@@ -1,0 +1,178 @@
+.narration-panel {
+  border-top: 1px solid var(--border-hairline);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  /* phase transitions are opacity-based for smooth zone switching */
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* Phase: fading — existing text dims before skeleton replaces it */
+.narration-panel--fading .narration-panel__text,
+.narration-panel--fading .narration-panel__source,
+.narration-panel--fading .narration-panel__actions,
+.narration-panel--fading .narration-panel__disclaimer {
+  opacity: 0.3;
+  transition: opacity 80ms linear;
+}
+
+/* narration-skeleton fades in only in skeleton phase, not fading */
+.narration-skeleton--fading {
+  opacity: 0;
+}
+
+.narration-panel__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.narration-panel__zone-name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.narration-panel__badge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-outline) 40%, transparent);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color var(--duration-slow) var(--ease-out);
+}
+
+.narration-panel__confidence-track {
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  margin-top: var(--space-3);
+}
+
+.narration-panel__confidence-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 500ms var(--ease-out);
+}
+
+.narration-panel__confidence-fill--high {
+  background: #4ade80;
+}
+.narration-panel__confidence-fill--medium {
+  background: #fbbf24;
+}
+.narration-panel__confidence-fill--low {
+  background: #f87171;
+}
+
+/* ---- Skeleton -------------------------------------------------------------
+   Deliberately not a spinner: three settling lines read as "text is being
+   composed," which is closer to the truth than a generic loading glyph. */
+.narration-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  animation: skeleton-fade-in 150ms var(--ease-out);
+}
+
+.narration-skeleton__line {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--bg-hover) 0%,
+    var(--bg-active) 50%,
+    var(--bg-hover) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes skeleton-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.narration-panel__text {
+  margin-top: var(--space-4);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.narration-panel__text--fadein {
+  animation: narration-text-in 350ms var(--ease-out) both;
+}
+
+@keyframes narration-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.narration-panel__source {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-hairline);
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.narration-panel__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.narration-panel__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-hairline-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.narration-panel__action:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.narration-panel__disclaimer {
+  margin-top: var(--space-3);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  line-height: var(--leading-sm);
+}

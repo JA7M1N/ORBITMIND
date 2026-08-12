@@ -1,0 +1,245 @@
+/* ==========================================================================
+   ZoneComparisonDrawer
+   Two-element approach: a thin map-backdrop + a fixed drawer panel.
+   The backdrop and drawer are SIBLINGS (not parent/child) so the backdrop
+   CSS mask never hides the drawer.
+   ========================================================================== */
+
+/* ── Map backdrop (only covers the left/map side) ──────────────────────────── */
+
+.zone-cmp-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Stop 380px from the right so the right panel stays interactive */
+  right: 380px;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(1px);
+  z-index: var(--z-modal);
+  cursor: pointer;
+  animation: cmp-fade-in 200ms ease both;
+}
+
+@keyframes cmp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Drawer panel (fixed to the right edge of the viewport) ─────────────────── */
+
+.zone-cmp {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  background: var(--bg-panel-solid);
+  border-left: 1px solid var(--border-hairline-strong);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: var(--z-modal);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+  animation: cmp-slide-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cmp-slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────────── */
+
+.zone-cmp__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-hairline);
+  background: var(--bg-elevated);
+}
+
+.zone-cmp__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.zone-cmp__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: color 150ms ease, background 150ms ease;
+}
+.zone-cmp__close:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+/* ── Zone name headers ───────────────────────────────────────────────────────── */
+
+.zone-cmp__zone-headers {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border-hairline);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.zone-cmp__zone-label {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 1px solid var(--border-hairline);
+}
+.zone-cmp__zone-label:first-child {
+  border-left: none;
+}
+
+.zone-cmp__zone-name {
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zone-cmp__zone-rank {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ── Metric rows ─────────────────────────────────────────────────────────────── */
+
+.zone-cmp__body {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.06) transparent;
+}
+
+.zone-cmp__section-header {
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.zone-cmp__section-title {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: var(--weight-semibold);
+}
+
+.zone-cmp__row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  min-height: 44px;
+  transition: background 150ms ease;
+}
+.zone-cmp__row:hover {
+  background: var(--bg-hover);
+}
+
+/* Left column: metric name */
+.zone-cmp__metric-label {
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+}
+
+/* Value cells */
+.zone-cmp__cell {
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--weight-medium);
+  position: relative;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+/* "Worse" value gets accent tint — draws eye to the crisis */
+.zone-cmp__cell--worse {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--text-primary);
+}
+.zone-cmp__cell--worse::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+}
+
+/* Score bar inside priority score row */
+.zone-cmp__score-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+}
+.zone-cmp__score-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 600ms var(--ease-out), background 400ms ease;
+}
+
+/* ── Verdict banner ──────────────────────────────────────────────────────────── */
+
+.zone-cmp__verdict {
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-hairline);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.zone-cmp__verdict-label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.zone-cmp__verdict-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-weight: var(--weight-medium);
+}
+
+.zone-cmp__verdict-highlight {
+  color: var(--accent-outline);
+  font-weight: var(--weight-semibold);
+}

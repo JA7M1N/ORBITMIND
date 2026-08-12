@@ -1,0 +1,14 @@
+{
+  "event_id": "kerala_2018",
+  "disaster_type": "flood",
+  "total_area_km2": 1574.18,
+  "avg_confidence": 0.8709,
+  "feature_count": 8,
+  "bbox": [
+    76.0,
+    9.5,
+    77.5,
+    11.0
+  ],
+  "source": "mock"
+}

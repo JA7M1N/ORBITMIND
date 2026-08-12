@@ -1,0 +1,37 @@
+# Environment Configurations
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python compilation files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Frontend dependency and build files
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Testing files
+.pytest_cache/
+htmlcov/
+smoke_result.txt

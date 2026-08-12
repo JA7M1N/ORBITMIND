@@ -1,0 +1,230 @@
+.priority-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hairline);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-md);
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  /* 200ms is the one deliberate deviation from the --duration-fast (150ms)
+     token: a rank list benefits from a hair more weight on hover than a
+     button press does, so the lift reads as "considering" not "clicking." */
+  transition:
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out);
+}
+
+.priority-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.priority-card:active {
+  transform: translateY(0);
+}
+
+.priority-card--selected {
+  border-left-color: var(--accent);
+  background: var(--bg-active);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), var(--shadow-subtle);
+}
+
+/* ---- Rank badge --------------------------------------------------------- */
+.priority-rank {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition: background-color var(--duration-slow) var(--ease-out), color var(--duration-slow) var(--ease-out);
+}
+
+.priority-rank--1 {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-subtle);
+}
+
+.priority-rank--2 {
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+  color: #fff;
+}
+
+.priority-rank--3 {
+  background: color-mix(in srgb, var(--accent) 50%, transparent);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.priority-rank--other {
+  background: var(--bg-hover);
+  color: var(--text-tertiary);
+}
+
+/* ---- Body ---------------------------------------------------------------- */
+.priority-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.priority-card__name-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+/* Wrapper for score + compare button — keeps them on one baseline */
+.priority-card__name-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.priority-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priority-card__score {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* Compare button — tiny pill, hidden until parent card is hovered */
+.priority-card__compare-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  /* Hidden by default — revealed on card hover */
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity  150ms ease,
+    transform 200ms var(--ease-spring),
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+/* Reveal on parent card hover */
+.priority-card:hover .priority-card__compare-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+.priority-card__compare-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  color: var(--text-primary);
+}
+/* Active (pinned) state — always visible with accent color */
+.priority-card__compare-btn--active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
+  color: var(--accent-outline);
+}
+
+.priority-card__score-bar {
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.priority-card__score-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width var(--duration-base) var(--ease-out), background-color var(--duration-slow) var(--ease-out);
+}
+
+.priority-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: 2px;
+}
+
+.priority-card__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  color: var(--text-tertiary);
+}
+
+.priority-card__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-xs);
+}
+
+.priority-card__stat svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.priority-card__stat span.font-mono {
+  color: var(--text-secondary);
+  font-weight: var(--weight-medium);
+}
+
+/* ---- Confidence pill ------------------------------------------------------ */
+.confidence-pill {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+  padding: 2px 6px;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.confidence-pill--high {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.confidence-pill--medium {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.confidence-pill--low {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+}

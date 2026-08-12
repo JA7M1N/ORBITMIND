@@ -1,0 +1,310 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.289726,
+              30.604835
+            ],
+            [
+              79.283032,
+              30.611592
+            ],
+            [
+              79.105268,
+              30.685095
+            ],
+            [
+              79.026024,
+              30.634978
+            ],
+            [
+              79.012911,
+              30.593182
+            ],
+            [
+              78.915457,
+              30.561724
+            ],
+            [
+              79.023131,
+              30.575451
+            ],
+            [
+              78.99835,
+              30.542598
+            ],
+            [
+              79.22412,
+              30.584126
+            ],
+            [
+              79.289726,
+              30.604835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.902,
+        "area_km2": 506.755,
+        "disaster_type": "wildfire",
+        "source": "mock_nbr",
+        "event_id": "uttarakhand_2024",
+        "severity": "high",
+        "location_label": "Lansdowne Forest Division",
+        "dnbr": 0.252,
+        "estimated_trees_lost": 600608
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.953019,
+              30.205481
+            ],
+            [
+              79.881001,
+              30.232068
+            ],
+            [
+              79.749527,
+              30.246187
+            ],
+            [
+              79.732161,
+              30.140093
+            ],
+            [
+              79.750281,
+              30.133867
+            ],
+            [
+              79.782395,
+              30.154484
+            ],
+            [
+              79.865192,
+              30.128259
+            ],
+            [
+              79.952524,
+              30.165118
+            ],
+            [
+              79.946524,
+              30.199197
+            ],
+            [
+              79.953019,
+              30.205481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8516,
+        "area_km2": 325.654,
+        "disaster_type": "wildfire",
+        "source": "mock_nbr",
+        "event_id": "uttarakhand_2024",
+        "severity": "high",
+        "location_label": "Nainital Slopes",
+        "dnbr": 0.311,
+        "estimated_trees_lost": 476273
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.021828,
+              30.93633
+            ],
+            [
+              78.984986,
+              30.927846
+            ],
+            [
+              78.982757,
+              30.947195
+            ],
+            [
+              78.912122,
+              30.937804
+            ],
+            [
+              78.829876,
+              30.911033
+            ],
+            [
+              78.776112,
+              30.892078
+            ],
+            [
+              78.819185,
+              30.876691
+            ],
+            [
+              78.835986,
+              30.838642
+            ],
+            [
+              79.025241,
+              30.865944
+            ],
+            [
+              79.021828,
+              30.93633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7641,
+        "area_km2": 224.524,
+        "disaster_type": "wildfire",
+        "source": "mock_nbr",
+        "event_id": "uttarakhand_2024",
+        "severity": "medium",
+        "location_label": "Tehri Watershed",
+        "dnbr": 0.112,
+        "estimated_trees_lost": 334080
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.271829,
+              30.825123
+            ],
+            [
+              80.213522,
+              30.851749
+            ],
+            [
+              80.21078,
+              30.866109
+            ],
+            [
+              80.151751,
+              30.801697
+            ],
+            [
+              80.180549,
+              30.749299
+            ],
+            [
+              80.201032,
+              30.760702
+            ],
+            [
+              80.255135,
+              30.725208
+            ],
+            [
+              80.258802,
+              30.752116
+            ],
+            [
+              80.275623,
+              30.779869
+            ],
+            [
+              80.271829,
+              30.825123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7991,
+        "area_km2": 271.957,
+        "disaster_type": "wildfire",
+        "source": "mock_nbr",
+        "event_id": "uttarakhand_2024",
+        "severity": "medium",
+        "location_label": "Pithoragarh Forest",
+        "dnbr": 0.215,
+        "estimated_trees_lost": 231370
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.562229,
+              31.105018
+            ],
+            [
+              79.504244,
+              31.135438
+            ],
+            [
+              79.446114,
+              31.149737
+            ],
+            [
+              79.399818,
+              31.078388
+            ],
+            [
+              79.458248,
+              31.080233
+            ],
+            [
+              79.419791,
+              31.05193
+            ],
+            [
+              79.482315,
+              31.016868
+            ],
+            [
+              79.489743,
+              31.048663
+            ],
+            [
+              79.557966,
+              31.094685
+            ],
+            [
+              79.562229,
+              31.105018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.7212,
+        "area_km2": 181.483,
+        "disaster_type": "wildfire",
+        "source": "mock_nbr",
+        "event_id": "uttarakhand_2024",
+        "severity": "low",
+        "location_label": "Chamoli Oak Belt",
+        "dnbr": 0.104,
+        "estimated_trees_lost": 214385
+      }
+    }
+  ]
+}

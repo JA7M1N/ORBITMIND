@@ -1,0 +1,284 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.8,
+            19.1
+          ],
+          [
+            86.2,
+            19.4
+          ],
+          [
+            85.6,
+            19.8
+          ],
+          [
+            84.9,
+            20.3
+          ],
+          [
+            84.3,
+            20.9
+          ],
+          [
+            84.05,
+            21.2
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.97,
+        "disaster_type": "cyclone",
+        "source": "mock_insat3d",
+        "event_id": "odisha_2023",
+        "feature_type": "storm_track",
+        "cyclone_name": "Michaung",
+        "max_wind_speed_kmh": 195,
+        "landfall_location": "Bapatla, Andhra Pradesh",
+        "track_length_km": 380
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.679363,
+              19.201744
+            ],
+            [
+              86.787632,
+              19.222531
+            ],
+            [
+              86.72222,
+              19.244952
+            ],
+            [
+              86.522119,
+              19.243765
+            ],
+            [
+              86.40619,
+              19.254439
+            ],
+            [
+              86.312087,
+              19.178397
+            ],
+            [
+              86.452744,
+              19.150162
+            ],
+            [
+              86.620839,
+              19.15453
+            ],
+            [
+              86.679363,
+              19.201744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8478,
+        "area_km2": 677.457,
+        "disaster_type": "cyclone",
+        "source": "mock_surge_model",
+        "event_id": "odisha_2023",
+        "feature_type": "storm_surge",
+        "wind_speed_kmh": 175,
+        "storm_surge_m": 4.2,
+        "location_label": "Ganjam District Coast",
+        "villages_affected": 20,
+        "evacuation_required": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.024545,
+              19.463388
+            ],
+            [
+              85.900659,
+              19.50421
+            ],
+            [
+              85.821286,
+              19.482513
+            ],
+            [
+              85.786392,
+              19.483956
+            ],
+            [
+              85.744088,
+              19.496922
+            ],
+            [
+              85.586308,
+              19.452894
+            ],
+            [
+              85.872622,
+              19.422512
+            ],
+            [
+              85.927721,
+              19.446506
+            ],
+            [
+              86.024545,
+              19.463388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8888,
+        "area_km2": 469.737,
+        "disaster_type": "cyclone",
+        "source": "mock_surge_model",
+        "event_id": "odisha_2023",
+        "feature_type": "storm_surge",
+        "wind_speed_kmh": 195,
+        "storm_surge_m": 5.0,
+        "location_label": "Puri District Coast",
+        "villages_affected": 22,
+        "evacuation_required": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.395145,
+              19.701671
+            ],
+            [
+              85.02904,
+              19.692321
+            ],
+            [
+              85.060708,
+              19.692575
+            ],
+            [
+              85.021535,
+              19.67358
+            ],
+            [
+              85.12554,
+              19.654085
+            ],
+            [
+              85.112493,
+              19.639776
+            ],
+            [
+              85.198227,
+              19.640404
+            ],
+            [
+              85.264545,
+              19.682686
+            ],
+            [
+              85.395145,
+              19.701671
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.9344,
+        "area_km2": 408.559,
+        "disaster_type": "cyclone",
+        "source": "mock_surge_model",
+        "event_id": "odisha_2023",
+        "feature_type": "storm_surge",
+        "wind_speed_kmh": 180,
+        "storm_surge_m": 3.8,
+        "location_label": "Khordha Coastal Blocks",
+        "villages_affected": 69,
+        "evacuation_required": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.597173,
+              20.154805
+            ],
+            [
+              84.51721,
+              20.128807
+            ],
+            [
+              84.438586,
+              20.059618
+            ],
+            [
+              84.433793,
+              20.04055
+            ],
+            [
+              84.500715,
+              20.069972
+            ],
+            [
+              84.58003,
+              20.084433
+            ],
+            [
+              84.667259,
+              20.070646
+            ],
+            [
+              84.674021,
+              20.076477
+            ],
+            [
+              84.597173,
+              20.154805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "confidence": 0.8743,
+        "area_km2": 299.408,
+        "disaster_type": "cyclone",
+        "source": "mock_surge_model",
+        "event_id": "odisha_2023",
+        "feature_type": "storm_surge",
+        "wind_speed_kmh": 155,
+        "storm_surge_m": 2.5,
+        "location_label": "Jagatsinghpur Mouth",
+        "villages_affected": 73,
+        "evacuation_required": true
+      }
+    }
+  ]
+}
